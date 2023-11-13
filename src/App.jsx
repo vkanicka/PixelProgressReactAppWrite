@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { account, ID } from './lib/appwrite';
-import { Loading } from '../Loading'
+import { account, ID, databases } from './lib/appwrite';
+import { Query } from "appwrite";
 
 const App = () => {
   const [loading, setLoading] = useState(true)
@@ -8,6 +8,7 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('')
   const [password, setPassword] = useState('');
+  const [goals, setGoals] = useState(null)
 
   const login = async (email, password) => {
     setLoading(true)
@@ -39,6 +40,19 @@ const App = () => {
       console.error(error)
     }
     setLoading(false)
+  }
+
+  const getGoals = async () => {
+    try {
+      const response = await databases.listDocuments(
+        import.meta.env.VITE_APPWRITE_DATABASE_ID,
+        import.meta.env.VITE_APPWRITE_GOALS_ID,
+      );
+      setGoals(response.documents);
+    } catch (error) {
+      console.error(error)
+    }
+    console.log(goals)
   }
 
   useEffect(() => {
@@ -76,19 +90,52 @@ const App = () => {
             )}
 
 
-        {loggedInUser && (
-          <button
-            className='p-2 my-2 border border-emerald-200 rounded-lg'
-            type="button"
-            onClick={logout}
-          >
-            Logout
-          </button>
+       {loggedInUser && (
+         <div>
+            <button
+              className='p-2 my-2 border border-emerald-200 rounded-lg'
+              type="button"
+              onClick={logout}
+            >
+              Logout
+            </button>
+            
+           
+         </div>
         )}
-      </form>
+     </form>
+
+     {goals?.length ? (
+       <div>
+          <h3>Goals</h3>
+          {goals?.map((goal, index) => {
+            return (
+              <h4 key={index}>{goal.name}</h4>
+            )
+          })}
+      </div>
+     ) : (
+         <button
+              className='p-2 my-2 border border-emerald-200 rounded-lg'
+              type="button"
+              onClick={getGoals}
+            >
+              Get Goals
+            </button>
+         
+     )}
+     
+     {/* goals.length && (
+             <h3>Goals</h3>
+             {goals.map((goal, index) => {
+               return (
+                 <h4 key={index}>{goal.name}</h4>
+               )
+             })}
+           ) */}
       
     </div>
-  ) : <Loading />;
+  ) : <p className="m-2 p-2 text-lg">Loading...</p>;
 };
 
 export default App;
