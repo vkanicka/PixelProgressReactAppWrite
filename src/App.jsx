@@ -1,54 +1,93 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { account, ID } from './lib/appwrite';
 
 const App = () => {
+  const [loading, setLoading] = useState(true)
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('')
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
 
-  async function login(email, password) {
-    await account.createEmailSession(email, password);
-    setLoggedInUser(await account.get());
+  const login = async (email, password) => {
+    setLoading(true)
+    try {
+      await account.createEmailSession(email, password);
+      let accountDetails = await account.get()
+      setLoggedInUser(accountDetails)
+    } catch (error) {
+      console.error(error)
+    }
+    setLoading(false)
   }
 
-  return (
-    <div>
-      <p>
-        {loggedInUser ? `Logged in as ${loggedInUser.name}` : 'Not logged in'}
-      </p>
+  const logout = async () => {
+    await account.deleteSession('current');
+    setLoggedInUser(null);
+  }
 
-      <form>
-        <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-        <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+  const register = async () => {
+    await account.create(ID.unique(), email, password, name);
+    login(email, password);
+  }
 
-        <button type="button" onClick={() => login(email, password)}>
-          Login
-        </button>
+  const checkUserStatus = async () => {
+    try {
+      let accountDetails = await account.get()
+      setLoggedInUser(accountDetails);
+    } catch (error) {
+      console.error(error)
+    }
+    setLoading(false)
+  }
 
-        <button
-          type="button"
-          onClick={async () => {
-            await account.create(ID.unique(), email, password, name);
-            login(email, password);
-          }}
-        >
-          Register
-        </button>
+  useEffect(() => {
+    checkUserStatus()
+  }, [])
 
-        <button
-          type="button"
-          onClick={async () => {
-            await account.deleteSession('current');
-            setLoggedInUser(null);
-          }}
-        >
-          Logout
-        </button>
+ return !loading ? (
+    <div className={'m-2 my-2'}>
+
+      {loggedInUser && (
+        <h1 className='text-lg self-center'>{loggedInUser ? `Logged in as ${loggedInUser.name}` : 'Welcome'}</h1>
+      )}
+    
+
+      <form className='p-2 my-2'>
+        {!loggedInUser && (
+          <div>
+          <input className='bg-grey-100 rounded p-2 m-2 block border border-grey-300' type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+          <input className='bg-grey-100 rounded p-2 m-2 block border border-grey-300' type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+          <input className='bg-grey-100 rounded p-2 m-2 block border border-grey-300' type="name" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+
+          <div className=''>
+            <button className='bg-emerald-100 rounded-lg p-2 m-2 border border-emerald-300' type="button" onClick={async () => login(email, password)}>
+              Login
+            </button>
+            <button
+              className='bg-emerald-100 rounded-lg p-2 m-2 border border-emerald-300'
+              type="button"
+              onClick={register}
+            >
+              Register
+            </button>
+            </div>
+            </div>
+            )}
+
+
+        {loggedInUser && (
+          <button
+            className='p-2 my-2 border border-emerald-200 rounded-lg'
+            type="button"
+            onClick={logout}
+          >
+            Logout
+          </button>
+        )}
       </form>
+      
     </div>
-  );
+  ) : <p className={'m-2 my-2 text-lg'}>Loading...</p>;
 };
 
 export default App;
