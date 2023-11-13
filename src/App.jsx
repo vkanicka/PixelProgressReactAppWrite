@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { account, ID } from './lib/appwrite';
+import { Loading } from '../Loading'
 
 const App = () => {
   const [loading, setLoading] = useState(true)
@@ -87,7 +88,7 @@ const App = () => {
       </form>
       
     </div>
-  ) : <p className={'m-2 my-2 text-lg'}>Loading...</p>;
+  ) : <Loading />;
 };
 
 export default App;
