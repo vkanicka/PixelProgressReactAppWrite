@@ -1,3 +1,5 @@
+import Steps from './Steps'
+
 /* eslint-disable react/prop-types */
 const Goal = ({ goal, index }) => {
     const formatDate = (date) => {
@@ -6,33 +8,18 @@ const Goal = ({ goal, index }) => {
         return formattedDate
     }
     
-    console.log(goal)
+    const fillStep = () => {
+        console.log('potato')
+    }
         
     return (
         <div key={index}>
             <h4 key={index}>{goal.name}</h4>
-            <h5>Dates</h5>
-            <ul>
-                {goal?.week_start_dates?.map((date, dateIndex) => {
-                    return (
-                        <li key={`week-${dateIndex}`}>{formatDate(date)}</li>
-                    )
-                })}
-            </ul>
-            <ul>
-                {goal?.days?.map((day, dayIndex) => {
-                    return (
-                        <li key={`day-${dayIndex}`}>{day}</li>
-                    )
-                })}
-            </ul>
-            <ul>
-                {goal?.steps?.map((step, stepIndex) => {
-                    return (
-                        <li key={`step-${stepIndex}`}>{step}</li>
-                    )
-                })}
-            </ul>
+            <Steps
+                sessions={goal?.days}
+                steps={goal?.steps}
+                reps={goal?.week_start_dates.map(date=>formatDate(date))}
+            />
         </div>
     )
 }
