@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { account, databases } from './lib/appwrite';
-import { Query } from "appwrite";
-import { VITE_APPWRITE_DATABASE_ID, VITE_APPWRITE_GOALS_ID, } from './lib/appwrite'
+import { account } from './lib/appwrite';
+
 
 import Button from './components/Button'
 import Entry from './components/Entry'
@@ -13,14 +12,10 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('')
   const [password, setPassword] = useState('');
-  const [goals, setGoals] = useState(null)
-
-
 
   const logout = async () => {
     await account.deleteSession('current');
     setLoggedInUser(null);
-    setGoals(null)
   }
 
   const checkUserStatus = async () => {
@@ -33,21 +28,6 @@ const App = () => {
     setLoading(false)
   }
 
-  const getGoals = async () => {
-    try {
-      const response = await databases.listDocuments(
-        VITE_APPWRITE_DATABASE_ID,
-        VITE_APPWRITE_GOALS_ID,
-        [
-          Query.equal("user_id", [loggedInUser?.$id])
-        ]
-      );
-      setGoals(response.documents);
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   useEffect(() => {
     checkUserStatus()
   }, [])
@@ -58,10 +38,7 @@ const App = () => {
        <div>
          <h1 className='text-lg self-center'>{loggedInUser ? `Logged in as ${loggedInUser.name}` : 'Welcome'}</h1>
           <Button fx={logout} text={'Logout'} />
-          <Button fx={getGoals} text={'Get Goals'} />
-          {goals?.length && (
-             <Goals goals={goals} />
-          )}
+          <Goals loggedInUser={loggedInUser} />
         </div>
      ) : <Entry email={email} setEmail={setEmail} password={password} setPassword={setPassword} name={name} setName={setName} setLoading={setLoading} setLoggedInUser={setLoggedInUser}/>}
 
