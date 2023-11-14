@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, createContext } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { account, ID } from './lib/appwrite';
 import { Loading } from '../Loading'
 
@@ -62,7 +62,6 @@ const register = async (email, password, name) => {
     )
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const useAuth = () => useContext(AuthContext)
+export const useAuth = () => { return useContext(AuthContext) }
 
 export default AuthContext
