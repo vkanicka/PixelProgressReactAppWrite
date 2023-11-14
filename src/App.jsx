@@ -25,6 +25,7 @@ const App = () => {
   const logout = async () => {
     await account.deleteSession('current');
     setLoggedInUser(null);
+    setGoals(null)
   }
 
   const register = async () => {
@@ -47,12 +48,14 @@ const App = () => {
       const response = await databases.listDocuments(
         import.meta.env.VITE_APPWRITE_DATABASE_ID,
         import.meta.env.VITE_APPWRITE_GOALS_ID,
+        [
+          Query.equal("user_id", [loggedInUser?.$id])
+        ]
       );
       setGoals(response.documents);
     } catch (error) {
       console.error(error)
     }
-    console.log(goals)
   }
 
   useEffect(() => {
@@ -105,35 +108,26 @@ const App = () => {
         )}
      </form>
 
-     {goals?.length ? (
-       <div>
-          <h3>Goals</h3>
-          {goals?.map((goal, index) => {
-            return (
-              <h4 key={index}>{goal.name}</h4>
-            )
-          })}
-      </div>
-     ) : (
-         <button
-              className='p-2 my-2 border border-emerald-200 rounded-lg'
-              type="button"
-              onClick={getGoals}
-            >
-              Get Goals
-            </button>
-         
+     {loggedInUser && (
+      <button
+                className='p-2 my-2 border border-emerald-200 rounded-lg'
+                type="button"
+                onClick={getGoals}
+              >
+                Get Goals
+      </button>
      )}
-     
-     {/* goals.length && (
-             <h3>Goals</h3>
-             {goals.map((goal, index) => {
-               return (
-                 <h4 key={index}>{goal.name}</h4>
-               )
-             })}
-           ) */}
-      
+
+     {goals?.length && (
+       <div>
+         <h3>Goals</h3>
+         {goals?.map((goal, index) => {
+           return (
+             <h4 key={index}>{goal.name}</h4>
+           )
+         })}
+       </div>
+     )}
     </div>
   ) : <p className="m-2 p-2 text-lg">Loading...</p>;
 };
