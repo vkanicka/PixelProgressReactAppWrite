@@ -5,6 +5,7 @@ import Entry from './components/Entry'
 import Goals from './components/Goals'
 import { PlusCircle } from 'react-feather';
 import BuildForm from './components/BuildForm';
+import UpdateGoal from './components/UpdateGoal';
 
 const App = () => {
   const [loading, setLoading] = useState(true)
@@ -13,6 +14,8 @@ const App = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('');
   const [creatingGoal, setCreatingGoal] = useState(false)
+  const [updatingGoal, setUpdatingGoal] = useState(false)
+  const [goalToUpdate, setGoalToUpdate] = useState(false)
   const logout = async () => {
     await account.deleteSession('current');
     setLoggedInUser(null);
@@ -34,7 +37,7 @@ const App = () => {
 
  return !loading ? (
    loggedInUser ? (
-     creatingGoal ? <BuildForm userId={loggedInUser?.$id} setCreatingGoal={setCreatingGoal} /> :
+     creatingGoal ? <BuildForm userId={loggedInUser?.$id} setCreatingGoal={setCreatingGoal} /> : updatingGoal ? <UpdateGoal setUpdatingGoal={setUpdatingGoal} goalToUpdate={goalToUpdate} /> :
      <div className='flex flex-col items-center'>
        <div className='absolute top-0 right-0 m-4 gap-4 flex flex-col'>
            <h1 className='text-lg text-lightgray'>Logged in as {loggedInUser.name}</h1>
@@ -47,7 +50,7 @@ const App = () => {
             <h1 className='text-lg text-lightgray'>{creatingGoal ? 'Creating Goal' : 'Create New Goal'}</h1>
          </div>
        </div>
-          <Goals loggedInUser={loggedInUser} />
+          <Goals loggedInUser={loggedInUser} setUpdatingGoal={setUpdatingGoal} setGoalToUpdate={setGoalToUpdate} />
         </div>
      ) : <Entry email={email} setEmail={setEmail} password={password} setPassword={setPassword} name={name} setName={setName} setLoading={setLoading} setLoggedInUser={setLoggedInUser}/>
 

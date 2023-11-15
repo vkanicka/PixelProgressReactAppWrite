@@ -3,7 +3,7 @@ import { VITE_APPWRITE_DATABASE_ID, VITE_APPWRITE_GOALS_ID, databases } from '..
 import { Query } from "appwrite"
 import Goal from './Goal'
 /* eslint-disable react/prop-types */
-const Goals = ({ loggedInUser }) => {
+const Goals = ({ loggedInUser, setUpdatingGoal, setGoalToUpdate }) => {
 
     const [goals, setGoals] = useState(null)
 
@@ -30,7 +30,7 @@ const Goals = ({ loggedInUser }) => {
             {goals?.length ? goals.map((goal, index) => {
                 return (
                     <div className='mt-12' key={index}>
-                        <Goal goal={goal} getGoals={getGoals} />
+                        <Goal goal={goal} getGoals={getGoals} setUpdatingGoal={setUpdatingGoal} setGoalToUpdate={setGoalToUpdate} />
                     </div>
                     )
             }) : <p className="m-2 p-2 text-2xl tracking-widest uppercase self-center text-center text-lightgray my-24">Loading...</p>}
