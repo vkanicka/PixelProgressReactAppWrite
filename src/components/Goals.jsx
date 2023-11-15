@@ -30,7 +30,7 @@ const Goals = ({ loggedInUser }) => {
             {goals?.length ? goals.map((goal, index) => {
                 return (
                     <div className='mt-12' key={index}>
-                        <Goal goal={goal}/>
+                        <Goal goal={goal} getGoals={getGoals} />
                     </div>
                     )
             }) : <p className="m-2 p-2 text-2xl tracking-widest uppercase self-center text-center text-lightgray my-24">Loading...</p>}
