@@ -23,7 +23,6 @@ const Steps = ({ goal, sessions, steps, reps }) => {
        }
     
     const updateStatus = async (document_id, status) => {
-        console.log(updateStatus)
         try {
             const response = await databases.updateDocument(
                 VITE_APPWRITE_DATABASE_ID,
@@ -93,7 +92,6 @@ const Steps = ({ goal, sessions, steps, reps }) => {
                             const currentStatus = statuses?.filter(s => s.$id === `W${r}D${i}S${j}`)[0]?.is_completed
                             const fillStep = () => {
                                 updateStatus(statusId, currentStatus)
-                                console.log(`clicked: ${statusId}`)
                             }
                     return (
                       <Step
