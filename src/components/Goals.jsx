@@ -25,7 +25,6 @@ const Goals = ({ loggedInUser }) => {
             getGoals()
         }, [])
     
-
     return (
         <div>
             {goals?.length ? goals.map((goal, index) => {
