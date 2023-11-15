@@ -6,7 +6,7 @@ const Step = ({rep, session, step, fillStep, status}) => {
         key={`${rep}-${session}-${step}`}
         id={`${rep}-${session}-${step}`}
         onClick={fillStep}
-        className={(status ? 'bg-cyan ' : '') + 'h-10 w-10 m-4 border-2 border-lightblue hover:bg-lightgray cursor-pointer transition-colors duration-300'}
+        className={(status ? 'bg-cyan ' : '') + 'h-10 w-10 m-4 border-4 border-lightblue hover:bg-lightgray cursor-pointer transition-colors duration-300'}
       >
       </td>
     )
