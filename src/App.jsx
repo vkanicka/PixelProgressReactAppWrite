@@ -4,8 +4,7 @@ import { LogOut } from 'react-feather'
 import Entry from './components/Entry'
 import Goals from './components/Goals'
 import { PlusCircle } from 'react-feather';
-// import TestCreate from './components/TestCreate';
-import CreateGoal from './components/CreateGoal';
+import BuildForm from './components/BuildForm';
 
 const App = () => {
   const [loading, setLoading] = useState(true)
@@ -14,7 +13,6 @@ const App = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('');
   const [creatingGoal, setCreatingGoal] = useState(false)
-
   const logout = async () => {
     await account.deleteSession('current');
     setLoggedInUser(null);
@@ -36,7 +34,7 @@ const App = () => {
 
  return !loading ? (
    loggedInUser ? (
-     creatingGoal ? <CreateGoal userId={loggedInUser?.$id}/> :
+     creatingGoal ? <BuildForm userId={loggedInUser?.$id} setCreatingGoal={setCreatingGoal} /> :
      <div className='flex flex-col items-center'>
        <div className='absolute top-0 right-0 m-4 gap-4 flex flex-col'>
            <h1 className='text-lg text-lightgray'>Logged in as {loggedInUser.name}</h1>
