@@ -1,7 +1,46 @@
+import { useState, useEffect } from "react";
+import { VITE_APPWRITE_DATABASE_ID, VITE_APPWRITE_STATUSES_ID, databases } from '../lib/appwrite'
+import { Query } from "appwrite"
 /* eslint-disable react/prop-types */
 import Step from "./Step";
 
-const Steps = ({ sessions, steps, reps }) => {
+const Steps = ({ goal, sessions, steps, reps }) => {
+    const [statuses, setStatuses] = useState(null)
+
+       const getStatuses = async () => {
+        try {
+        const response = await databases.listDocuments(
+            VITE_APPWRITE_DATABASE_ID,
+            VITE_APPWRITE_STATUSES_ID,
+            [
+            Query.equal("goals", [goal])
+            ]
+        );
+            setStatuses(response.documents);
+        } catch (error) {
+        console.error(error)
+        }
+       }
+    
+    const updateStatus = async (document_id, status) => {
+        console.log(updateStatus)
+        try {
+            const response = await databases.updateDocument(
+                VITE_APPWRITE_DATABASE_ID,
+                VITE_APPWRITE_STATUSES_ID,
+                document_id,
+                {"is_completed": !status}
+            );
+                setStatuses([...statuses, response]);
+        } catch (error) {
+            console.error(error)
+        }
+       }
+    
+      useEffect(() => {
+            getStatuses()
+      }, [])
+    
     return (
       <table className='uppercase border-separate border-spacing-[2px]'>
         {sessions.map(session => {
@@ -20,7 +59,7 @@ const Steps = ({ sessions, steps, reps }) => {
               return (
                 <th
                   key={`${i}-header`}
-                  className="text-gray-300"
+                  className="text-gray-500 font-thin tracking-widest text-lg"
                   colSpan={steps.length}
                       scope="colgroup"
                 >
@@ -34,7 +73,7 @@ const Steps = ({ sessions, steps, reps }) => {
             {sessions.map((session, s) => {
               return steps.map((step, i) => {
                 return (
-                  <th key={`${s}-${i}-header`} className='text-gray-400 whitespace-nowrap text-xs text-center px-[10px]' scope="col">
+                  <th key={`${s}-${i}-header`} className='font-thin text-gray-400 whitespace-nowrap text-xs text-center px-[10px]' scope="col">
                     {step}
                   </th>
                 );
@@ -45,13 +84,16 @@ const Steps = ({ sessions, steps, reps }) => {
           {reps.map((rep, r) => {
             return (
               <tr key={`${r}-row`}>
-                <th className='text-gray-300' scope="row" key={`${r}-row-header`}>
+                <th className='font-thin text-right text-gray-500 tracking-widest px-8' scope="row" key={`${r}-row-header`}>
                   {rep}
                 </th>
                     {sessions.map((session, i) => {
                         return steps.map((step, j) => {
+                            const statusId = `W${r}D${i}S${j}`
+                            const currentStatus = statuses?.filter(s => s.$id === `W${r}D${i}S${j}`)[0]?.is_completed
                             const fillStep = () => {
-                                console.log(`clicked: W${r}D${i}S${j}`)
+                                updateStatus(statusId, currentStatus)
+                                console.log(`clicked: ${statusId}`)
                             }
                     return (
                       <Step
@@ -59,6 +101,7 @@ const Steps = ({ sessions, steps, reps }) => {
                         rep={rep}
                         session={session}
                         step={step}
+                        status={currentStatus}
                         fillStep={fillStep}
                       />
                     );

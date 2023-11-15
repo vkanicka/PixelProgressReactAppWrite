@@ -8,7 +8,6 @@ const Goals = ({ loggedInUser }) => {
     const [goals, setGoals] = useState(null)
 
     const getGoals = async () => {
-        console.log('getGoals...')
         try {
         const response = await databases.listDocuments(
             VITE_APPWRITE_DATABASE_ID,
@@ -17,7 +16,7 @@ const Goals = ({ loggedInUser }) => {
             Query.equal("user_id", [loggedInUser?.$id])
             ]
         );
-        setGoals(response.documents);
+            setGoals(response.documents);
         } catch (error) {
         console.error(error)
         }
