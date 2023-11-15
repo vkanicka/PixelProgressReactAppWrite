@@ -22,6 +22,8 @@ npm install
 - tailwind
 - appwrite
 
+### Check appwrite server status: https://www.appwrite.online/
+
 
 Resources:
 - https://appwrite.io/docs/quick-starts/react
