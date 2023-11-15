@@ -2,7 +2,7 @@
 const GetGoalsButton = ({fx, text}) => {
     return (
         <button
-                className='p-2 my-2 border border-emerald-200 rounded-lg'
+                className='hover:underline border-lightgray border bg-lightblue w-full rounded px-16 py-2'
                 type="button"
                 onClick={fx}
               >

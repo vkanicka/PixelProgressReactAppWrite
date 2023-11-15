@@ -10,7 +10,7 @@ const Goal = ({ goal, index }) => {
         
     return (
         <div key={index}>
-            <h4 key={index}>{goal.name}</h4>
+            <h4 className='text-lightgray uppercase tracking-widest text-xl' key={index}>{goal.name}</h4>
             <Steps
                 goal={goal?.$id}
                 sessions={goal?.days}

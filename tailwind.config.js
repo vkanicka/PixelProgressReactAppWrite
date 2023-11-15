@@ -5,8 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "my-blue": "#a0dde3",
+        "my-lilac-400": "#DDADFF",
+        "my-lilac-600": "#C370FF",
+        "my-lime-300": "#caff8a",
+        "lightgray": "#d3d3d3",
+        "cyan": "#00FFFF",
+        "lightblue": "#ADD8E6"
+      },
+    },
   },
   plugins: [],
 }
-

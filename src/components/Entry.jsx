@@ -23,12 +23,12 @@ const Entry = ({ email, setEmail, password, setPassword, name, setName, setLoadi
       }
   
     return (
-          <form className='p-2 my-2'>
+          <form className='p-2 my-24 flex flex-col items-center'>
            <Input type={'email'} placeholder={'Email'} value={email} fx={setEmail} />
            <Input type={'password'} placeholder={'Password'} value={password} fx={setPassword} />
            <Input type={'name'} placeholder={'Name'} value={name} fx={setName} />
 
-           <div className=''>
+           <div className='flex flex-col gap-4 my-4'>
              <Button fx={async () => login(email, password)} text={'Login'} />
              <Button fx={register} text={'Register'} />
             </div>

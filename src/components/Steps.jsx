@@ -58,7 +58,7 @@ const Steps = ({ goal, sessions, steps, reps }) => {
               return (
                 <th
                   key={`${i}-header`}
-                  className="text-gray-500 font-thin tracking-widest text-lg"
+                  className="text-lightblue font-light tracking-widest text-lg"
                   colSpan={steps.length}
                       scope="colgroup"
                 >
@@ -83,7 +83,7 @@ const Steps = ({ goal, sessions, steps, reps }) => {
           {reps.map((rep, r) => {
             return (
               <tr key={`${r}-row`}>
-                <th className='font-thin text-center text-gray-500 tracking-widest pr-8' scope="row" key={`${r}-row-header`}>
+                <th className='font-light text-center text-lightblue tracking-widest pr-8' scope="row" key={`${r}-row-header`}>
                   {rep}
                 </th>
                     {sessions.map((session, i) => {
