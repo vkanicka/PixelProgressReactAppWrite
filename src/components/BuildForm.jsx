@@ -5,6 +5,7 @@ import Input from './Input'
 import Button from './Button'
 import { VITE_APPWRITE_DATABASE_ID, VITE_APPWRITE_GOALS_ID, databases } from '../lib/appwrite'
 import { ID } from "appwrite"
+import { ChevronsLeft } from 'react-feather'
 
 const BuildForm = ({userId, setCreatingGoal}) => {
     const [name, setName] = useState('')
@@ -35,7 +36,11 @@ const BuildForm = ({userId, setCreatingGoal}) => {
 
     return (
         <div className="mb-96">
-            <h1>Build Form</h1>
+            <div className='flex gap-2 cursor-pointer' onClick={()=>setCreatingGoal(false)} >
+                <ChevronsLeft className='text-lightgray' />
+                <p className='text-lightgray'>Back</p>
+            </div>
+                <h1>Build Form</h1>
             <Input type={'name'} placeholder={'Name'} value={name} fx={setName} />
             <SetFormArray fieldName={'Days'} formArray={days} setFormArray={setDays} />
             <SetFormArray fieldName={'Steps'} formArray={steps} setFormArray={setSteps} />
