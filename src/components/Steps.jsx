@@ -72,7 +72,7 @@ const Steps = ({ goal, sessions, steps, reps }) => {
             {sessions.map((session, s) => {
               return steps.map((step, i) => {
                 return (
-                  <th key={`${s}-${i}-header`} className='font-thin text-gray-400 whitespace-nowrap text-xs text-center px-[10px]' scope="col">
+                  <th key={`${s}-${i}-header`} className='font-thin text-gray-400 whitespace-nowrap text-xs text-center pr-[10px]' scope="col">
                     {step}
                   </th>
                 );
@@ -83,7 +83,7 @@ const Steps = ({ goal, sessions, steps, reps }) => {
           {reps.map((rep, r) => {
             return (
               <tr key={`${r}-row`}>
-                <th className='font-thin text-right text-gray-500 tracking-widest px-8' scope="row" key={`${r}-row-header`}>
+                <th className='font-thin text-center text-gray-500 tracking-widest pr-8' scope="row" key={`${r}-row-header`}>
                   {rep}
                 </th>
                     {sessions.map((session, i) => {

@@ -33,16 +33,14 @@ const App = () => {
   }, [])
 
  return !loading ? (
-    <div className={'m-2 my-2'}>
-     {loggedInUser ? (
-       <div>
+     loggedInUser ? (
+       <div className='flex flex-col items-center'>
          <h1 className='text-lg self-center'>{loggedInUser ? `Logged in as ${loggedInUser.name}` : 'Welcome'}</h1>
           <Button fx={logout} text={'Logout'} />
           <Goals loggedInUser={loggedInUser} />
         </div>
-     ) : <Entry email={email} setEmail={setEmail} password={password} setPassword={setPassword} name={name} setName={setName} setLoading={setLoading} setLoggedInUser={setLoggedInUser}/>}
+     ) : <Entry email={email} setEmail={setEmail} password={password} setPassword={setPassword} name={name} setName={setName} setLoading={setLoading} setLoggedInUser={setLoggedInUser}/>
 
-    </div>
   ) : <p className="m-2 p-2 text-lg">Loading...</p>;
 };
 
