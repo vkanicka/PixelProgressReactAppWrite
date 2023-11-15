@@ -3,6 +3,9 @@ import { account } from './lib/appwrite';
 import { LogOut } from 'react-feather'
 import Entry from './components/Entry'
 import Goals from './components/Goals'
+import { PlusCircle } from 'react-feather';
+// import TestCreate from './components/TestCreate';
+import CreateGoal from './components/CreateGoal';
 
 const App = () => {
   const [loading, setLoading] = useState(true)
@@ -10,6 +13,7 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('')
   const [password, setPassword] = useState('');
+  const [creatingGoal, setCreatingGoal] = useState(false)
 
   const logout = async () => {
     await account.deleteSession('current');
@@ -31,11 +35,19 @@ const App = () => {
   }, [])
 
  return !loading ? (
-     loggedInUser ? (
+   loggedInUser ? (
+     creatingGoal ? <CreateGoal userId={loggedInUser?.$id}/> :
      <div className='flex flex-col items-center'>
-       <div className='absolute flex justify-end gap-8 w-full items-center mr-12'>
-         <h1 className='text-lg text-lightgray'>Logged in as {loggedInUser.name}</h1>
-         <LogOut className='cursor-pointer text-white bg-lightgray p-1 rounded-full' onClick={logout} />
+       <div className='absolute top-0 right-0 m-4 gap-4 flex flex-col'>
+           <h1 className='text-lg text-lightgray'>Logged in as {loggedInUser.name}</h1>
+         <div className='flex gap-4'>
+          <LogOut className='cursor-pointer text-white bg-lightgray p-1 rounded-full' onClick={logout} /> 
+           <h1 className='text-lg text-lightgray'>Logout</h1>
+           </div>
+         <div className='flex gap-4 cursor-pointer hover:underline' onClick={()=>setCreatingGoal(true)}>
+            <PlusCircle className='text-lightgray' />
+            <h1 className='text-lg text-lightgray'>{creatingGoal ? 'Creating Goal' : 'Create New Goal'}</h1>
+         </div>
        </div>
           <Goals loggedInUser={loggedInUser} />
         </div>
