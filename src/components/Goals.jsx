@@ -16,7 +16,7 @@ const Goals = ({ loggedInUser, setUpdatingGoal, setGoalToUpdate }) => {
             Query.equal("user_id", [loggedInUser?.$id])
             ]
         );
-            setGoals(response.documents);
+            setGoals(response?.documents);
         } catch (error) {
         console.error(error)
         }

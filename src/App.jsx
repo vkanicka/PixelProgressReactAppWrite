@@ -41,8 +41,8 @@ const App = () => {
      <div className='flex flex-col items-center'>
        <div className='absolute top-0 right-0 m-4 gap-4 flex flex-col'>
            <h1 className='text-lg text-lightgray'>Logged in as {loggedInUser.name}</h1>
-         <div className='flex gap-4'>
-          <LogOut className='cursor-pointer text-white bg-lightgray p-1 rounded-full' onClick={logout} /> 
+         <div className='cursor-pointer hover:underline flex gap-4' onClick={logout}>
+          <LogOut className='cursor-pointer text-white bg-lightgray p-1 rounded-full'  /> 
            <h1 className='text-lg text-lightgray'>Logout</h1>
            </div>
          <div className='flex gap-4 cursor-pointer hover:underline' onClick={()=>setCreatingGoal(true)}>
@@ -50,7 +50,7 @@ const App = () => {
             <h1 className='text-lg text-lightgray'>{creatingGoal ? 'Creating Goal' : 'Create New Goal'}</h1>
          </div>
        </div>
-          <Goals loggedInUser={loggedInUser} setUpdatingGoal={setUpdatingGoal} setGoalToUpdate={setGoalToUpdate} />
+          <Goals loggedInUser={loggedInUser} setUpdatingGoal={setUpdatingGoal} setGoalToUpdate={setGoalToUpdate}  />
         </div>
      ) : <Entry email={email} setEmail={setEmail} password={password} setPassword={setPassword} name={name} setName={setName} setLoading={setLoading} setLoggedInUser={setLoggedInUser}/>
 

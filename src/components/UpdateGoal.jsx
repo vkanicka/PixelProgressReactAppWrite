@@ -12,7 +12,7 @@ const UpdateGoal = ({setUpdatingGoal, goalToUpdate}) => {
     const [steps, setSteps] = useState(goalToUpdate?.steps)
     const [weeks, setWeeks] = useState(goalToUpdate?.week_start_dates.map(date=>date.replace('T00:00:00.000+00:00','')))
 
-    const createGoal = async () => {
+    const updateGoal = async () => {
         try {
         const response = await databases.updateDocument(
             VITE_APPWRITE_DATABASE_ID,
@@ -43,7 +43,7 @@ const UpdateGoal = ({setUpdatingGoal, goalToUpdate}) => {
             <SetFormArray fieldName={'Days'} formArray={days} setFormArray={setDays} />
             <SetFormArray fieldName={'Steps'} formArray={steps} setFormArray={setSteps} />
             <SetFormArray fieldName={'Weeks'} formArray={weeks} setFormArray={setWeeks} type={'date'} />
-            <Button fx={createGoal} text={'Update Goal'} />
+            <Button fx={updateGoal} text={'Update Goal'} />
         </div>
     )
 }
