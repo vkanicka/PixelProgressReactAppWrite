@@ -13,8 +13,8 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('')
   const [password, setPassword] = useState('');
-  const [creatingGoal, setCreatingGoal] = useState(false)
-  const [updatingGoal, setUpdatingGoal] = useState(false)
+  const [creatingGoal, setCreatingGoal] = useState(true) // change back to false
+  const [updatingGoal, setUpdatingGoal] = useState(false) // change back to false
   const [goalToUpdate, setGoalToUpdate] = useState(false)
   const logout = async () => {
     await account.deleteSession('current');

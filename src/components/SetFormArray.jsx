@@ -21,7 +21,6 @@ const SetFormArray = ({fieldName, formArray, setFormArray, type='text'}) => {
             <div className='flex gap-2 cursor-pointer'>
                 <h1 className='tracking-widest text-lg text-gray-600 my-2'>{fieldName}</h1>
             </div>
-            {formArray && (
                 <ul className='flex gap-4 flex-wrap'>
                     {formArray?.map((value, index) => {
                         return (
@@ -48,7 +47,6 @@ const SetFormArray = ({fieldName, formArray, setFormArray, type='text'}) => {
                         </div>
                     }
                 </ul>
-            )}
         </div>
     )
 }
