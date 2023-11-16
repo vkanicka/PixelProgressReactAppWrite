@@ -21,7 +21,7 @@ const Step = ({ statusId, goal, newCompleted, setNewCompleted }) => {
       <td
         key={statusId}
         onClick={()=>updateStatus()}
-        className={(currentStatus ? 'bg-cyan ' : '') + 'h-10 w-10 m-4 border-4 border-lightblue hover:bg-lightgray cursor-pointer transition-colors duration-300'}
+        className={(currentStatus ? 'bg-my-cyan ' : '') + 'h-10 w-10 m-4 border-4 border-lightblue hover:bg-lightgray cursor-pointer transition-colors duration-300'}
       >
       </td>
     )

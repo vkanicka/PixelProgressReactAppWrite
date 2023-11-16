@@ -12,7 +12,7 @@ export default {
         "my-lilac-600": "#C370FF",
         "my-lime-300": "#caff8a",
         "lightgray": "#d3d3d3",
-        "cyan": "#00FFFF",
+        "my-cyan": "#00FFFF",
         "lightblue": "#ADD8E6"
       },
     },

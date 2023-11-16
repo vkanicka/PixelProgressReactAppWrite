@@ -65,10 +65,10 @@ const Goal = ({ goal, index, getGoals, setUpdatingGoal, setGoalToUpdate }) => {
         <div key={index}>
             <div className='flex gap-2'>
                 <h4 className='text-lightgray uppercase tracking-widest text-xl' key={index}>{goal?.name}</h4>
-                <EditIcon onClick={()=>handleEditGoalClick()} className='text-lightgray cursor-pointer hover:text-cyan'/>
-                <Save onClick={()=>handleSaveStatusClick()} className='text-lightgray cursor-pointer hover:text-cyan'/>
-                <Refresh onClick={()=>handleRefreshClick()} className='text-lightgray cursor-pointer hover:text-cyan'/>
-                <Trash2 onClick={deleteGoal} className='text-lightgray hover:cursor-pointer hover:text-cyan' />
+                <EditIcon onClick={()=>handleEditGoalClick()} className='text-lightgray cursor-pointer hover:text-my-cyan'/>
+                <Save onClick={()=>handleSaveStatusClick()} className='text-lightgray cursor-pointer hover:text-my-cyan'/>
+                <Refresh onClick={()=>handleRefreshClick()} className='text-lightgray cursor-pointer hover:text-my-cyan'/>
+                <Trash2 onClick={deleteGoal} className='text-lightgray hover:cursor-pointer hover:text-my-cyan' />
             </div>
             <Steps
                 goal={goal}
