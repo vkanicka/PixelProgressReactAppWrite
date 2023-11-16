@@ -42,8 +42,8 @@ const SetFormArray = ({fieldName, formArray, setFormArray, type='text'}) => {
                             
                         </form>
                     ) :
-                     <div className='py-2 px-2 items-center inline-flex rounded-full hover:cursor-pointer hover:bg-gradient-to-t hover:from-purple-100 hover:border-t-white hover:border-l-white hover:to-cyan-100 border-2 border-t-cyan-200 border-l-cyan-200 border-dashed border-purple-200 bg-none'>
-                        <Plus size={20} onClick={() => setAddingValue(true)}  className='self-center text-purple-300 ml-24' />
+                     <div onClick={() => setAddingValue(true)} className='py-2 px-2 items-center inline-flex rounded-full hover:cursor-pointer hover:bg-gradient-to-t hover:from-purple-100 hover:border-t-white hover:border-l-white hover:to-cyan-100 border-2 border-t-cyan-200 border-l-cyan-200 border-dashed border-purple-200 bg-none'>
+                        <Plus size={20} className='self-center text-purple-300 ml-24' />
                         </div>
                     }
                 </ul>
