@@ -47,7 +47,7 @@ const UpdateGoal = ({setUpdatingGoal, goalToUpdate}) => {
                 </div>
                 <SetFormArray fieldName={'Days'} formArray={days} setFormArray={setDays} />
                 <SetFormArray fieldName={'Steps'} formArray={steps} setFormArray={setSteps} />
-                <SetFormArray fieldName={'Weeks'} formArray={weeks} setFormArray={setWeeks} type={'date'} />
+                <SetFormArray fieldName={'Week Start Dates'} formArray={weeks} setFormArray={setWeeks} type={'date'} />
                 <hr className='my-4'/>
                 <Button fx={updateGoal} text={'Update Goal'} />
             </div>

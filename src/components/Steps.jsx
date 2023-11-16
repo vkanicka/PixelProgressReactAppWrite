@@ -15,7 +15,7 @@ const Steps = ({ goal, newCompleted, setNewCompleted }) => {
     const reps = goal?.week_start_dates.map(date => formatDate(date))
     
     return (
-      <table className='uppercase border-separate border-spacing-[2px]'>
+      <table className='uppercase table-fixed border-separate border-spacing-[2px]'>
         {sessions.map(session => {
           return (
             <colgroup
@@ -46,7 +46,7 @@ const Steps = ({ goal, newCompleted, setNewCompleted }) => {
             {sessions.map((session, s) => {
               return steps.map((step, i) => {
                 return (
-                  <th key={`${s}-${i}-header`} className='font-thin text-gray-400 whitespace-nowrap text-xs text-center pr-[10px]' scope="col">
+                  <th key={`${s}-${i}-header`} className='font-thin text-gray-400 text-wrap word-break max-w-[15px] text-xs text-center word-bread break-words' scope="col">
                     {step}
                   </th>
                 );
