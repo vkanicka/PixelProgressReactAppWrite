@@ -10,7 +10,7 @@ const UpdateGoal = ({setUpdatingGoal, goalToUpdate}) => {
     const [name, setName] = useState(goalToUpdate?.name)
     const [days, setDays] = useState(goalToUpdate?.days)
     const [steps, setSteps] = useState(goalToUpdate?.steps)
-    const [weeks, setWeeks] = useState(goalToUpdate?.week_start_dates.map(date=>date.replace('T00:00:00.000+00:00','')))
+    const [weeks, setWeeks] = useState(goalToUpdate?.week_start_dates.map(date=>date.replace(/T.*/,'')))
 
     const updateGoal = async () => {
         try {
